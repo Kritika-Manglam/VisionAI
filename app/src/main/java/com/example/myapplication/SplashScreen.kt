@@ -17,7 +17,7 @@ class SplashScreen : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_splash_screen)
         Handler(Looper.getMainLooper()).postDelayed({
-            startActivity(Intent(this,firstpg::class.java))
+            startActivity(Intent(this,choicePage::class.java))
             finish()//to not get this page even after doing back from all the pages
         } ,3000)
 //        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->

@@ -58,7 +58,7 @@
         android:layout_width="269dp"
         android:layout_height="79dp"
         android:gravity="center"
-        android:text="DETECTION"
+        android:text="OBJECT DETECTION"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textColorHighlight="@color/white"
