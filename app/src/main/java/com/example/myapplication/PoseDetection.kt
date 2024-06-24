@@ -26,24 +26,11 @@ import org.tensorflow.lite.support.image.TensorImage
 import org.tensorflow.lite.support.image.ops.ResizeOp
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
 
-//class PoseDetection : AppCompatActivity() {
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        enableEdgeToEdge()
-//        setContentView(R.layout.activity_pose_detection)
-//        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-//            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-//            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-//            insets
-//        }
-//    }
-//}
-
 
 class PoseDetection : AppCompatActivity() {
 
     val paint = Paint()
-    lateinit var imageProcessor: ImageProcessor
+    lateinit var imageProcessor: ImageProcessor // to resize the image
     lateinit var model: LitemodelmovenetsingleposelightningfliteFloat164
     lateinit var bitmap: Bitmap
     lateinit var imageView: ImageView
@@ -60,7 +47,7 @@ class PoseDetection : AppCompatActivity() {
         model = LitemodelmovenetsingleposelightningfliteFloat164.newInstance(this)
         imageView = findViewById(R.id.imageView)
         textureView = findViewById(R.id.textureView)
-        cameraManager = getSystemService(Context.CAMERA_SERVICE) as CameraManager
+        cameraManager = getSystemService(Context.CAMERA_SERVICE) as CameraManager //requesting for camera service
         handlerThread = HandlerThread("videoThread")
         handlerThread.start()
         handler = Handler(handlerThread.looper)
@@ -100,10 +87,12 @@ class PoseDetection : AppCompatActivity() {
 
                 Log.d("output__", outputFeature0.size.toString())
                 while(x <= 49){
+                    //if x+2 is greater than 45 percent then we will draw for the keypoint
                     if(outputFeature0.get(x+2) > 0.45){
+                        //to draw circle on keypoints
                         canvas.drawCircle(outputFeature0.get(x+1)*w, outputFeature0.get(x)*h, 10f, paint)
                     }
-                    x+=3
+                    x+=3//since we used 0,1,2 three values at once
                 }
 
                 imageView.setImageBitmap(mutable)
@@ -112,12 +101,12 @@ class PoseDetection : AppCompatActivity() {
 
     }
 
-    override fun onDestroy() {
+    override fun onDestroy() {//once the app is destroyed we have to close the ml model
         super.onDestroy()
         model.close()
     }
 
-    @SuppressLint("MissingPermission")
+    @SuppressLint("MissingPermission")//since we have already taken the camera permission
     fun open_camera(){
         cameraManager.openCamera(cameraManager.cameraIdList[0], object:CameraDevice.StateCallback(){
             override fun onOpened(p0: CameraDevice) {
@@ -144,11 +133,13 @@ class PoseDetection : AppCompatActivity() {
         }, handler)
     }
 
-    fun get_permissions(){
+    fun get_permissions(){//to get permission for camera
         if(checkSelfPermission(android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
             requestPermissions(arrayOf(android.Manifest.permission.CAMERA), 101)
         }
     }
+
+    //a callback function to ask for permission if not granted
     override fun onRequestPermissionsResult(  requestCode: Int, permissions: Array<out String>, grantResults: IntArray  ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if(grantResults[0] != PackageManager.PERMISSION_GRANTED) get_permissions()

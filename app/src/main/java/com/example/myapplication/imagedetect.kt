@@ -1,23 +1,6 @@
 package com.example.myapplication
 
-//import android.os.Bundle
-//import androidx.activity.enableEdgeToEdge
-//import androidx.appcompat.app.AppCompatActivity
-//import androidx.core.view.ViewCompat
-//import androidx.core.view.WindowInsetsCompat
-//
-//class imagedetect : AppCompatActivity() {
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        enableEdgeToEdge()
-//        setContentView(R.layout.activity_imagedetect)
-//        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-//            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-//            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-//            insets
-//        }
-//    }
-//}
+
 
 import android.content.Intent
 import android.graphics.*
@@ -49,8 +32,8 @@ class imagedetect  : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_imagedetect)
-
-        labels = FileUtil.loadLabels(this, "mobilenet_objectdetection_labels.txt")
+       //FileUtil is given to us by tensor flow
+        labels = FileUtil.loadLabels(this, "mobilenet_objectdetection_labels.txt")//returns list of all labels
         model = AutoModel1.newInstance(this)
 
         paint.setColor(Color.BLUE)
@@ -74,10 +57,11 @@ class imagedetect  : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        //if the request code matches the code we gave, we will use the data to extract the img
         if(requestCode == 101){
-            var uri = data?.data
-            bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, uri)
-            get_predictions()
+            var uri = data?.data//location where image is stored
+            bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, uri)//access the image and store that inside the bitmap
+            get_predictions()//we will get the predictions on image after storing the image
         }
     }
 
@@ -91,9 +75,9 @@ class imagedetect  : AppCompatActivity() {
         var image = TensorImage.fromBitmap(bitmap)
         image = imageProcessor.process(image)
         val outputs = model.process(image)
-        val locations = outputs.locationsAsTensorBuffer.floatArray
-        val classes = outputs.classesAsTensorBuffer.floatArray
-        val scores = outputs.scoresAsTensorBuffer.floatArray
+        val locations = outputs.locationsAsTensorBuffer.floatArray//to draw location
+        val classes = outputs.classesAsTensorBuffer.floatArray//to get the names/labels of object
+        val scores = outputs.scoresAsTensorBuffer.floatArray//to get the confidence of the object detection
         val numberOfDetections = outputs.numberOfDetectionsAsTensorBuffer.floatArray
 
 
@@ -104,21 +88,21 @@ class imagedetect  : AppCompatActivity() {
         var w = mutable.width
 
 
-        paint.textSize = h/15f
+        paint.textSize = h/20f
         paint.strokeWidth = h/85f
         scores.forEachIndexed { index, fl ->
-            if(fl > 0.5){
-                var x = index
+            if(fl > 0.5){//if score is greater than 50%
+                var x = index//index is 0 it will go from 0 to 3 then index is 1 it will go from 4 to 7
                 x *= 4
-                paint.setColor(colors.get(index))
-                paint.style = Paint.Style.STROKE
+                paint.setColor(colors.get(index))//for every new index we get different color
+                paint.style = Paint.Style.STROKE//ti get stroke style rectangle not the filled rectangle
                 canvas.drawRect(RectF(locations.get(x+1)*w, locations.get(x)*h, locations.get(x+3)*w, locations.get(x+2)*h), paint)
-                paint.style = Paint.Style.FILL
+                paint.style = Paint.Style.FILL//since we want filled text not a stroke text
                 canvas.drawText(labels[classes.get(index).toInt()] + " " + fl.toString(), locations.get(x+1)*w, locations.get(x)*h, paint)
             }
         }
 
-        imageView.setImageBitmap(mutable)
+        imageView.setImageBitmap(mutable)//to show image on screen
 
     }
 }

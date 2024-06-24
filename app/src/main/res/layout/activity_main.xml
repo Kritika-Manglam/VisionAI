@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-
+<!--texture view is used to show streams or videos -->
     <TextureView
         android:id="@+id/textureView"
         android:layout_width="wrap_content"
@@ -20,6 +20,7 @@
         android:layout_marginEnd="43dp"
         android:layout_marginBottom="55dp" />
 
+    <!--texture view takes the bitmap and we will draw the prediction on the bitmap and then show the bitmap to the user -->
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -10,12 +10,12 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="280dp"
+        android:layout_width="380dp"
         android:layout_height="110dp"
         android:text="VisionAI"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="50sp"
+        android:textSize="70sp"
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,16 +33,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.466"
-        app:srcCompat="@drawable/visionai2" />
+        app:srcCompat="@drawable/visionai2"
+        />
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="348dp"
-        android:textColor="@color/black"
-        android:layout_height="76dp"
-        android:text="The object Detector AI build with Deep Learning"
+        android:layout_width="370dp"
+        android:layout_height="128dp"
+        android:text="An AI \napplication"
         android:textAlignment="center"
-        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

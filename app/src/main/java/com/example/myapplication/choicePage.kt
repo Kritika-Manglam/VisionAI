@@ -11,6 +11,8 @@ import androidx.core.view.WindowInsetsCompat
 class choicePage : AppCompatActivity() {
     private lateinit var bt1 : Button
     private lateinit var bt2 : Button
+    private lateinit var bt3 : Button
+    private lateinit var bt4 : Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -27,12 +29,16 @@ class choicePage : AppCompatActivity() {
             startActivity(intent)
         }
 
+        bt3= findViewById(R.id.b3)
+        bt3.setOnClickListener{
+            val intent= Intent (this , IdentifyLanguage::class.java )
+            startActivity(intent)
+        }
 
-
-//        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-//            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-//            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-//            insets
-//        }
+        bt4= findViewById(R.id.b4)
+        bt4.setOnClickListener{
+            val intent= Intent (this ,RecognizeText::class.java )
+            startActivity(intent)
+        }
     }
 }

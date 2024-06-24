@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1068006924572",
+    "project_id": "visionai-e6bed",
+    "storage_bucket": "visionai-e6bed.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1068006924572:android:4ce558def280120ebadad9",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_qxRUBYZsgj8NJZUOxn-AC1VM23Wz95M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -20,10 +20,5 @@ class SplashScreen : AppCompatActivity() {
             startActivity(Intent(this,choicePage::class.java))
             finish()//to not get this page even after doing back from all the pages
         } ,3000)
-//        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-//            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-//            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-//            insets
-//        }
     }
 }

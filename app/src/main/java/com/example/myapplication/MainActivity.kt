@@ -1,5 +1,3 @@
-
-
 //camera2api
 package com.example.myapplication
 import com.example.myapplication.ml.AutoModel1
@@ -70,8 +68,7 @@ class MainActivity : AppCompatActivity() {
         labels = FileUtil.loadLabels(this, "mobilenet_objectdetection_labels.txt")
         imageProcessor = ImageProcessor.Builder().add(ResizeOp(300, 300, ResizeOp.ResizeMethod.BILINEAR)).build()
         model = AutoModel1.newInstance(this)
-       // model = SsdMobilenetV11Metadata1.newInstance(this)   copied
-        //val model = AutoModel1.newInstance(context)
+
         val handlerThread = HandlerThread("videoThread")
         handlerThread.start()
         handler = Handler(handlerThread.looper)
@@ -81,7 +78,7 @@ class MainActivity : AppCompatActivity() {
         textureView = findViewById(R.id.textureView)
         textureView.surfaceTextureListener = object:TextureView.SurfaceTextureListener{
             override fun onSurfaceTextureAvailable(p0: SurfaceTexture, p1: Int, p2: Int) {
-                open_camera()
+                open_camera() //since we open the camera when the surface texture is available
             }
             override fun onSurfaceTextureSizeChanged(p0: SurfaceTexture, p1: Int, p2: Int) {
             }
@@ -91,22 +88,19 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onSurfaceTextureUpdated(p0: SurfaceTexture) {
-                bitmap = textureView.bitmap!!
+                bitmap = textureView.bitmap!!//giving null assertions(!!) so that if texture view gives null it creates null point exception error
                 var image = TensorImage.fromBitmap(bitmap)
                 image = imageProcessor.process(image)
-               // val outputs = model.process(image)
-//val locations = outputs.locationsAsTensorBuffer
-//val classes = outputs.classesAsTensorBuffer
-//val scores = outputs.scoresAsTensorBuffer
-//val numberOfDetections = outputs.numberOfDetectionsAsTensorBuffer
-                //copied
+
+                //written from the model
               val outputs = model.process(image)
                val locations = outputs.locationsAsTensorBuffer.floatArray
                 val classes = outputs.classesAsTensorBuffer.floatArray
                val scores = outputs.scoresAsTensorBuffer.floatArray
                val numberOfDetections = outputs.numberOfDetectionsAsTensorBuffer.floatArray
-
+               //the bitmap was immutable so making it mutable
                 var mutable = bitmap.copy(Bitmap.Config.ARGB_8888, true)
+                // to draw rectangle and prediction on bitmap we use canvas
                 val canvas = Canvas(mutable)
 
                 val h = mutable.height
@@ -151,7 +145,7 @@ class MainActivity : AppCompatActivity() {
                 var surface = Surface(surfaceTexture)
 
                 var captureRequest = cameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW)
-                captureRequest.addTarget(surface)
+                captureRequest.addTarget(surface)//connecting camera device with the surface
 
                 cameraDevice.createCaptureSession(listOf(surface), object: CameraCaptureSession.StateCallback(){
                     override fun onConfigured(p0: CameraCaptureSession) {
