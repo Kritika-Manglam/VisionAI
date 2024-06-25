@@ -38,6 +38,9 @@ android {
     buildFeatures {
         mlModelBinding = true
     }
+    aaptOptions {
+       noCompress ("tflite")
+   }
 }
 
 dependencies {
@@ -51,6 +54,7 @@ dependencies {
     implementation(libs.tensorflow.lite.metadata)
     implementation(libs.vision.common)
     implementation(libs.androidx.gridlayout)
+    implementation(libs.smart.reply.common)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -60,6 +64,9 @@ dependencies {
     //Identify the language of text
     implementation ("com.google.firebase:firebase-ml-natural-language:22.0.0")
     implementation ("com.google.firebase:firebase-ml-natural-language-language-id-model:20.0.7")
-//recognize text in image
+    //recognize text in image
     implementation ("com.google.firebase:firebase-ml-vision:24.0.3")
+    //smart reply
+    implementation ("com.google.firebase:firebase-ml-natural-language:22.0.0")
+    implementation ("com.google.firebase:firebase-ml-natural-language-smart-reply-model:20.0.7")
 }

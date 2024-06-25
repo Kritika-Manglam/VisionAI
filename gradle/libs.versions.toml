@@ -13,6 +13,7 @@ tensorflowLiteSupport = "0.1.0"
 tensorflowLiteMetadata = "0.1.0"
 visionCommon = "17.3.0"
 gridlayout = "1.0.0"
+smartReplyCommon = "16.1.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -27,6 +28,7 @@ tensorflow-lite-support = { group = "org.tensorflow", name = "tensorflow-lite-su
 tensorflow-lite-metadata = { group = "org.tensorflow", name = "tensorflow-lite-metadata", version.ref = "tensorflowLiteMetadata" }
 vision-common = { group = "com.google.mlkit", name = "vision-common", version.ref = "visionCommon" }
 androidx-gridlayout = { group = "androidx.gridlayout", name = "gridlayout", version.ref = "gridlayout" }
+smart-reply-common = { group = "com.google.mlkit", name = "smart-reply-common", version.ref = "smartReplyCommon" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
