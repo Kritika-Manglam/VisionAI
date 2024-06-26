@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SpeechToText"
+    android:background="@color/dark_blue">
+
+    <EditText
+        android:id="@+id/txtSpeechData"
+        android:layout_width="298dp"
+        android:layout_height="243dp"
+        android:layout_marginTop="150dp"
+        android:background="@drawable/tv_border"
+        android:backgroundTint="@color/light_blue"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Your text"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/btnSpeech"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.022" />
+
+    <Button
+        android:id="@+id/btnSpeech"
+        android:layout_width="283dp"
+        android:layout_height="85dp"
+        android:layout_marginBottom="304dp"
+        android:text="Tap To Speak"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/light_blue"/>
+
+    <Button
+        android:id="@+id/btnTextToSpeech"
+        android:layout_width="279dp"
+        android:layout_height="87dp"
+        android:layout_marginBottom="124dp"
+        android:text="TAP TO HEAR WHAT YOU WROTE"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnSpeech"
+        app:layout_constraintVertical_bias="0.795"
+        android:background="@color/light_blue"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
