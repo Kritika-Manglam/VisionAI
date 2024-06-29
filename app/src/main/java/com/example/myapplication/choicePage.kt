@@ -15,6 +15,7 @@ class choicePage : AppCompatActivity() {
     private lateinit var bt4 : Button
     private lateinit var bt5 : Button
     private lateinit var bt6 : Button
+    private lateinit var bt7: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -52,6 +53,11 @@ class choicePage : AppCompatActivity() {
         bt6= findViewById(R.id.b6)
         bt6.setOnClickListener{
             val intent= Intent (this , SpeechToText::class.java )
+            startActivity(intent)
+        }
+        bt7= findViewById(R.id.b7)
+        bt7.setOnClickListener{
+            val intent= Intent (this , InkRecognizer::class.java )
             startActivity(intent)
         }
     }

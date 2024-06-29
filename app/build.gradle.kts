@@ -69,4 +69,9 @@ dependencies {
     //smart reply
     implementation ("com.google.firebase:firebase-ml-natural-language:22.0.0")
     implementation ("com.google.firebase:firebase-ml-natural-language-smart-reply-model:20.0.7")
+    //ink recognizer
+        implementation ("com.google.mlkit:digital-ink-recognition:18.1.0")
+
+
+
 }
